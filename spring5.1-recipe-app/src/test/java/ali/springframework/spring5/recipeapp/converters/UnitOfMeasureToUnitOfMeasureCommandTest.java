@@ -10,44 +10,40 @@ import org.junit.jupiter.api.Test;
 import ali.springframework.spring5.recipeapp.commands.UnitOfMeasureCommand;
 import ali.springframework.spring5.recipeapp.domain.UnitOfMeasure;
 
-public class UnitOfMeasureCommandToUnitOfMeasureTest {
+public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     public static final String DESCRIPTION = "description";
-    public static final Long LONG_VALUE = 1L;
+    public static final Long LONG_VALUE = new Long(1L);
 
-    UnitOfMeasureCommandToUnitOfMeasure converter;
+    UnitOfMeasureToUnitOfMeasureCommand converter;
 
     @BeforeEach
     public void setUp() throws Exception {
-        converter = new UnitOfMeasureCommandToUnitOfMeasure();
-
+        converter = new UnitOfMeasureToUnitOfMeasureCommand();
     }
 
     @Test
-    public void testNullParamter() throws Exception {
+    public void testNullObjectConvert() throws Exception {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new UnitOfMeasureCommand()));
+    public void testEmptyObj() throws Exception {
+        assertNotNull(converter.convert(new UnitOfMeasure()));
     }
 
     @Test
     public void convert() throws Exception {
         //given
-        UnitOfMeasureCommand command = new UnitOfMeasureCommand();
-        command.setId(LONG_VALUE);
-        command.setDescription(DESCRIPTION);
-
+        UnitOfMeasure uom = new UnitOfMeasure();
+        uom.setId(LONG_VALUE);
+        uom.setDescription(DESCRIPTION);
         //when
-        UnitOfMeasure uom = converter.convert(command);
+        UnitOfMeasureCommand uomc = converter.convert(uom);
 
         //then
-        assertNotNull(uom);
-        assertEquals(LONG_VALUE, uom.getId());
-        assertEquals(DESCRIPTION, uom.getDescription());
-
+        assertEquals(LONG_VALUE, uomc.getId());
+        assertEquals(DESCRIPTION, uomc.getDescription());
     }
 
 }

@@ -2,10 +2,12 @@ package ali.springframework.spring5.recipeapp.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 
 import ali.springframework.spring5.recipeapp.commands.IngredientCommand;
 import ali.springframework.spring5.recipeapp.domain.Ingredient;
 
+@Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand,Ingredient>{
 
 	private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
